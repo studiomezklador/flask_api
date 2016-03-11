@@ -73,7 +73,7 @@ def getOneData(res_id):
 
 @app.route('/create', methods=['POST'])
 def create():
-    if not request.json or not 'company' in request.json:
+    if not request.json or 'company' not in request.json:
         abort(400)
     req = {
         'id': data[-1]['id'] + 1,
@@ -125,7 +125,7 @@ def not_found(error):
 
 
 @app.errorhandler(400)
-def not_found(error):
+def bad_request(error):
     resp = make_response(json.dumps(
         {'error_code': 400, 'error_msg': 'Bad request.'}
         ), 400)
@@ -134,7 +134,7 @@ def not_found(error):
 
 
 @app.errorhandler(401)
-def not_found(error):
+def unauthorized(error):
     resp = make_response(json.dumps(
         {'error_code': 401, 'error_msg': 'Unauthorized.'}
         ), 401)
@@ -143,7 +143,7 @@ def not_found(error):
 
 
 @app.errorhandler(403)
-def not_found(error):
+def forbidden(error):
     resp = make_response(json.dumps(
         {'error_code': 403, 'error_msg': 'Forbidden.'}
         ), 403)
@@ -152,7 +152,7 @@ def not_found(error):
 
 
 @app.errorhandler(405)
-def not_found(error):
+def not_allowed(error):
     resp = make_response(json.dumps(
         {'error_code': 405, 'error_msg': 'Method Not Allowed.'}
         ), 405)
@@ -161,7 +161,7 @@ def not_found(error):
 
 
 @app.errorhandler(406)
-def not_found(error):
+def not_acceptable(error):
     resp = make_response(json.dumps(
         {'error_code': 406, 'error_msg': 'Not acceptable.'}
         ), 406)
