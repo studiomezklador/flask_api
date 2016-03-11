@@ -35,7 +35,9 @@ def data_link(it):
     nu_data = {}
     for field in it:
         if field == 'id':
-            nu_data['uri'] = url_for('getOneData', res_id=it['id'], _external=True)
+            nu_data['uri'] = url_for('getOneData',
+                                     res_id=it['id'],
+                                     _external=True)
         else:
             nu_data[field] = it[field]
     return nu_data
